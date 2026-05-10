@@ -1,0 +1,17 @@
+export const coverage = [
+  "Forbes",
+  "Bloomberg",
+  "USA Today",
+  "Fox News",
+  "Daily Mail",
+  "New York Post",
+  "The Mirror",
+  "Cosmopolitan",
+  "Allrecipes",
+  "Time Out",
+  "Martha Stewart",
+  "House Beautiful",
+  "Quartz",
+  "Screen Rant",
+  "Narcity",
+];

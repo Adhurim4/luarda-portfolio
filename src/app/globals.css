@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+:root {
+  --cream: #fafaf7;
+  --white: #ffffff;
+  --charcoal: #2c2825;
+  --stone: #8c8279;
+  --terracotta: #c17b5c;
+  --deep-terra: #9a5c40;
+  --terra-tint: #f5ebe4;
+  --rose-tint: #f7efef;
+  --stone-light: #f0ede9;
+  --dusty-rose: #c4939f;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--charcoal);
+  font-family: var(--font-dm-sans), sans-serif;
+}
+
+/* Display / page headlines only — section titles use DM Sans per design concept */
+h1 {
+  font-family: var(--font-cormorant), serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Design concept v3: terracotta-tinted shadow */
+.shadow-soft-terra {
+  box-shadow: 0 4px 20px rgba(193, 123, 92, 0.1);
+}
+
+.shadow-soft-terra-hover:hover {
+  box-shadow: 0 6px 24px rgba(193, 123, 92, 0.14);
+}
+
+@keyframes fade-in-soft {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-soft {
+  animation: fade-in-soft 300ms ease forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-soft {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
