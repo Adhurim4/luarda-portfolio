@@ -5,6 +5,14 @@ import { CONTACT_EMAIL, CONTACT_MAILTO } from "@/config/site";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
+type Web3FormsResponse = {
+  success?: boolean;
+  message?: string;
+  body?: { message?: string };
+};
+
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim() ?? "";
+
 export function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -12,26 +20,72 @@ export function ContactForm() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
+  async function submitViaWeb3Forms(): Promise<{ ok: boolean; error?: string }> {
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        name,
+        email,
+        subject: `Website enquiry from ${name}`,
+        message,
+        botcheck: false,
+      }),
+    });
+
+    const data = (await response.json()) as Web3FormsResponse;
+    const apiMessage = data.message ?? data.body?.message;
+
+    if (data.success) {
+      return { ok: true };
+    }
+
+    return {
+      ok: false,
+      error:
+        apiMessage ??
+        "Could not send your message. Please try again or email gjataluarda@gmail.com directly.",
+    };
+  }
+
+  async function submitViaApi(): Promise<{ ok: boolean; error?: string }> {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, message, website: "" }),
+    });
+
+    const data = (await response.json()) as { error?: string };
+
+    if (response.ok) {
+      return { ok: true };
+    }
+
+    return {
+      ok: false,
+      error:
+        data.error ??
+        "Something went wrong. Please email gjataluarda@gmail.com directly.",
+    };
+  }
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus("submitting");
     setErrorMessage("");
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message, website: "" }),
-      });
+      const result = WEB3FORMS_KEY
+        ? await submitViaWeb3Forms()
+        : await submitViaApi();
 
-      const data = (await response.json()) as { error?: string };
-
-      if (!response.ok) {
+      if (!result.ok) {
         setStatus("error");
-        setErrorMessage(
-          data.error ??
-            "Something went wrong. Please email gjataluarda@gmail.com directly.",
-        );
+        setErrorMessage(result.error ?? "Could not send your message.");
         return;
       }
 
@@ -76,13 +130,14 @@ export function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
       <input
-        type="text"
-        name="website"
+        type="checkbox"
+        name="botcheck"
+        className="hidden"
+        style={{ display: "none" }}
         tabIndex={-1}
         autoComplete="off"
-        className="pointer-events-none absolute h-0 w-0 overflow-hidden opacity-0"
-        aria-hidden
       />
+
       <div>
         <label htmlFor="contact-name" className="type-label mb-2 block text-charcoal">
           Name
