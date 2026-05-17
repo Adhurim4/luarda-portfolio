@@ -11,7 +11,88 @@ type Web3FormsResponse = {
   body?: { message?: string };
 };
 
-const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim() ?? "";
+const BUILD_TIME_WEB3_KEY =
+  process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim() ?? "";
+
+async function resolveWeb3FormsKey(): Promise<string | null> {
+  if (BUILD_TIME_WEB3_KEY) {
+    return BUILD_TIME_WEB3_KEY;
+  }
+
+  try {
+    const response = await fetch("/api/contact/config");
+    if (!response.ok) {
+      return null;
+    }
+    const data = (await response.json()) as {
+      configured?: boolean;
+      accessKey?: string;
+    };
+    return data.configured && data.accessKey ? data.accessKey : null;
+  } catch {
+    return null;
+  }
+}
+
+async function submitViaWeb3Forms(
+  accessKey: string,
+  fields: { name: string; email: string; message: string },
+): Promise<{ ok: boolean; error?: string }> {
+  const response = await fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      access_key: accessKey,
+      name: fields.name,
+      email: fields.email,
+      subject: `Website enquiry from ${fields.name}`,
+      message: fields.message,
+      botcheck: false,
+    }),
+  });
+
+  const data = (await response.json()) as Web3FormsResponse;
+  const apiMessage = data.message ?? data.body?.message;
+
+  if (data.success) {
+    return { ok: true };
+  }
+
+  return {
+    ok: false,
+    error:
+      apiMessage ??
+      "Could not send your message. Please try again or email gjataluarda@gmail.com directly.",
+  };
+}
+
+async function submitViaResendApi(fields: {
+  name: string;
+  email: string;
+  message: string;
+}): Promise<{ ok: boolean; error?: string }> {
+  const response = await fetch("/api/contact", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ...fields, website: "" }),
+  });
+
+  const data = (await response.json()) as { error?: string };
+
+  if (response.ok) {
+    return { ok: true };
+  }
+
+  return {
+    ok: false,
+    error:
+      data.error ??
+      "Something went wrong. Please email gjataluarda@gmail.com directly.",
+  };
+}
 
 export function ContactForm() {
   const [name, setName] = useState("");
@@ -20,68 +101,18 @@ export function ContactForm() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
-  async function submitViaWeb3Forms(): Promise<{ ok: boolean; error?: string }> {
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        access_key: WEB3FORMS_KEY,
-        name,
-        email,
-        subject: `Website enquiry from ${name}`,
-        message,
-        botcheck: false,
-      }),
-    });
-
-    const data = (await response.json()) as Web3FormsResponse;
-    const apiMessage = data.message ?? data.body?.message;
-
-    if (data.success) {
-      return { ok: true };
-    }
-
-    return {
-      ok: false,
-      error:
-        apiMessage ??
-        "Could not send your message. Please try again or email gjataluarda@gmail.com directly.",
-    };
-  }
-
-  async function submitViaApi(): Promise<{ ok: boolean; error?: string }> {
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, message, website: "" }),
-    });
-
-    const data = (await response.json()) as { error?: string };
-
-    if (response.ok) {
-      return { ok: true };
-    }
-
-    return {
-      ok: false,
-      error:
-        data.error ??
-        "Something went wrong. Please email gjataluarda@gmail.com directly.",
-    };
-  }
-
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus("submitting");
     setErrorMessage("");
 
+    const fields = { name: name.trim(), email: email.trim(), message: message.trim() };
+
     try {
-      const result = WEB3FORMS_KEY
-        ? await submitViaWeb3Forms()
-        : await submitViaApi();
+      const web3Key = await resolveWeb3FormsKey();
+      const result = web3Key
+        ? await submitViaWeb3Forms(web3Key, fields)
+        : await submitViaResendApi(fields);
 
       if (!result.ok) {
         setStatus("error");

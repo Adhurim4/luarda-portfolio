@@ -19,45 +19,16 @@ function escapeHtml(value: string): string {
     .replace(/"/g, "&quot;");
 }
 
-async function sendViaWeb3Forms(fields: ContactFields): Promise<SendResult> {
-  const accessKey = process.env.WEB3FORMS_ACCESS_KEY?.trim();
-  if (!accessKey) {
-    return { ok: false, error: "Web3Forms not configured.", status: 503 };
-  }
-
-  const response = await fetch("https://api.web3forms.com/submit", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({
-      access_key: accessKey,
-      subject: `Website enquiry from ${fields.name}`,
-      from_name: fields.name,
-      email: fields.email,
-      message: fields.message,
-    }),
-  });
-
-  const data = (await response.json()) as { success?: boolean; message?: string };
-
-  if (!response.ok || !data.success) {
-    console.error("Web3Forms error:", data);
-    return {
-      ok: false,
-      error: "Could not send your message. Please try again or email directly.",
-      status: 500,
-    };
-  }
-
-  return { ok: true };
-}
-
-async function sendViaResend(fields: ContactFields): Promise<SendResult> {
+/** Server-side email — Resend only (Web3Forms runs in the browser). */
+export async function sendContactEmail(fields: ContactFields): Promise<SendResult> {
   const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) {
-    return { ok: false, error: "Resend not configured.", status: 503 };
+    return {
+      ok: false,
+      error:
+        "Contact form is not configured. Please email gjataluarda@gmail.com directly.",
+      status: 503,
+    };
   }
 
   const to = process.env.CONTACT_TO_EMAIL?.trim() || CONTACT_EMAIL;
@@ -96,28 +67,4 @@ async function sendViaResend(fields: ContactFields): Promise<SendResult> {
   }
 
   return { ok: true };
-}
-
-/** Web3Forms first (simplest for Vercel), then Resend. */
-export async function sendContactEmail(fields: ContactFields): Promise<SendResult> {
-  if (process.env.WEB3FORMS_ACCESS_KEY?.trim()) {
-    return sendViaWeb3Forms(fields);
-  }
-
-  if (process.env.RESEND_API_KEY?.trim()) {
-    return sendViaResend(fields);
-  }
-
-  return {
-    ok: false,
-    error:
-      "Contact form is not configured. Please email gjataluarda@gmail.com directly.",
-    status: 503,
-  };
-}
-
-export function isContactConfigured(): boolean {
-  return Boolean(
-    process.env.WEB3FORMS_ACCESS_KEY?.trim() || process.env.RESEND_API_KEY?.trim(),
-  );
 }
