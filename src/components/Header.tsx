@@ -17,7 +17,7 @@ const navItems = [
 function NavUnderline({ active }: { active: boolean }) {
   return (
     <span
-      className="pointer-events-none absolute bottom-0 left-0 h-[2px] w-full origin-left rounded-full bg-[var(--deep-terra)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+      className="pointer-events-none absolute bottom-0 left-0 h-[2px] w-full origin-left rounded-full bg-[var(--accent-primary)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
       style={{ transform: active ? "scaleX(1)" : "scaleX(0)" }}
       aria-hidden
     />
@@ -101,7 +101,7 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--stone-light)] bg-[color-mix(in_srgb,var(--cream)_93%,transparent)] backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-[var(--border-warm)] bg-[color-mix(in_srgb,var(--white)_93%,transparent)] backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4">
         <Link
           href="/"
@@ -129,7 +129,7 @@ export function Header() {
 
         <a
           href={EMAIL}
-          className="hidden rounded-[5px] bg-[var(--terracotta)] px-4 py-2.5 text-sm font-medium text-[var(--white)] transition-colors hover:bg-[var(--deep-terra)] md:inline-flex"
+          className="btn-primary hidden px-4 py-2.5 text-sm md:inline-flex"
         >
           Get in touch
         </a>
@@ -170,7 +170,7 @@ export function Header() {
             ))}
             <a
               href={EMAIL}
-              className="mt-2 rounded-[5px] bg-[var(--terracotta)] px-4 py-3 text-center text-sm font-medium text-[var(--white)] transition-colors hover:bg-[var(--deep-terra)]"
+              className="btn-primary mt-2 px-4 py-3 text-center text-sm"
               onClick={() => setOpen(false)}
             >
               Get in touch

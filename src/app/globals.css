@@ -4,13 +4,23 @@
   --cream: #fafaf7;
   --white: #ffffff;
   --charcoal: #2c2825;
-  --stone: #8c8279;
-  --terracotta: #c17b5c;
-  --deep-terra: #9a5c40;
-  --terra-tint: #f5ebe4;
-  --rose-tint: #f7efef;
+  --stone: #7a7a7a;
+  --accent-primary: #9a5c40;
+  --accent-hover: #7a4530;
+  --accent-mid: #c17b5c;
+  --accent-light: #f5ebe4;
   --stone-light: #f0ede9;
+  --border-warm: #e0d9d4;
+  --rose-tint: #f7efef;
   --dusty-rose: #c4939f;
+  --image-placeholder: #f0ede9;
+  --image-placeholder-hover: #e8ddd4;
+  --ink: #2c2825;
+
+  /* Legacy aliases */
+  --terracotta: var(--accent-primary);
+  --deep-terra: var(--accent-primary);
+  --terra-tint: var(--accent-light);
 }
 
 *,
@@ -30,7 +40,6 @@ body {
   font-family: var(--font-dm-sans), sans-serif;
 }
 
-/* Display / page headlines only — section titles use DM Sans per design concept */
 h1 {
   font-family: var(--font-cormorant), serif;
 }
@@ -40,13 +49,55 @@ a {
   text-decoration: none;
 }
 
-/* Design concept v3: terracotta-tinted shadow */
-.shadow-soft-terra {
-  box-shadow: 0 4px 20px rgba(193, 123, 92, 0.1);
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background: var(--accent-primary);
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.2s ease;
 }
 
-.shadow-soft-terra-hover:hover {
-  box-shadow: 0 6px 24px rgba(193, 123, 92, 0.14);
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  border: 1px solid var(--accent-primary);
+  background: transparent;
+  color: var(--accent-primary);
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.btn-ghost:hover {
+  background: var(--accent-light);
+}
+
+.card-refined {
+  border-radius: 12px;
+  border: 0.5px solid var(--border-warm);
+  background: var(--white);
+  transition: background 0.2s ease;
+}
+
+.card-refined:hover {
+  background: var(--accent-light);
+}
+
+.pill-availability {
+  border-radius: 20px;
+  border: 0.5px solid var(--accent-mid);
+  background: var(--accent-light);
+  color: var(--accent-primary);
 }
 
 @keyframes fade-in-soft {

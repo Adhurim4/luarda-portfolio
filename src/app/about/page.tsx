@@ -10,9 +10,6 @@ export const metadata: Metadata = {
     "Learn more about Luarda Gjata, a freelance digital PR specialist working across tech, cybersecurity, lifestyle, food, travel and international markets.",
 };
 
-const cardBase =
-  "rounded-[10px] border border-[var(--stone-light)] bg-[var(--white)] shadow-soft-terra shadow-soft-terra-hover transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--terra-tint)]";
-
 export default function AboutPage() {
   return (
     <main>
@@ -22,45 +19,47 @@ export default function AboutPage() {
           <h1 className="text-[clamp(2rem,4vw,2.625rem)] font-semibold leading-tight text-[var(--charcoal)] [font-family:var(--font-cormorant),serif]">
             About Luarda
           </h1>
-          <p className="mt-10 max-w-3xl text-[17px] leading-relaxed text-[var(--stone)]">
-            Hi, I’m Luarda — a freelance digital PR specialist working with brands
-            and agencies across the globe.
-          </p>
 
           <div className="mt-12 max-w-3xl space-y-8 text-[17px] leading-relaxed text-[var(--stone)]">
             <p>
-              I started my career in link building, always looking for smarter and
-              more sustainable ways to earn links. That curiosity led me to digital
-              PR — and eventually to building a full digital PR function from
-              scratch, starting with the business case and seeing it through to a
-              running operation.
+              Over six years ago, I started exploring digital PR as a way to build
+              links for the marketing agency I was working at. But the more I saw
+              what it could do, the brand visibility, the media relationships, and
+              the stories that actually landed, the more I realised it was
+              something much bigger than link building.
             </p>
             <p>
-              For me, great digital PR starts long before the pitch. It starts with
-              a strong idea — one rooted in data. I spend serious time on ideation
-              and data gathering: finding angles that are genuinely newsworthy,
-              identifying the statistics or research that give a story legs, and
-              shaping it all into something a journalist actually wants to write
-              about. The pitching comes after the thinking.
+              At one point, I built a digital PR department from scratch, making
+              the case for it, hiring the team, setting the strategy, and running
+              campaigns end to end. At another, I helped an outreach team fully
+              transition from traditional link building into insight-led digital
+              PR. Both experiences taught me what it really takes to make this
+              work.
             </p>
             <p>
-              Throughout my career I’ve also been the person other teams turn to
-              when making the shift into digital PR. I’ve led and trained outreach
-              teams — helping them move from traditional link building into running
-              full, insight-driven campaigns. Building that capability in others is
-              something I genuinely enjoy.
+              Over the years, I&apos;ve run campaigns across ideation, data
+              gathering, pitching, promotion, and reporting in tech, cybersecurity,
+              education, lifestyle, food, and travel, across the US, UK, European
+              and DACH markets, as well as Australia. Every market has its own media
+              landscape, and every industry its own angles. Finding those is still
+              my favourite part.
             </p>
             <p>
-              Over 6 years I’ve worked across tech, cybersecurity, education,
-              lifestyle, food, and travel — running campaigns for the US, UK, EU,
-              and DACH markets. Each industry, each market, needs its own angle.
-              That’s the part I find most interesting.
+              I&apos;m a data person. I enjoy digging into a dataset, finding the
+              number that tells a story nobody has told yet, and shaping it into
+              something a journalist actually wants to cover. That&apos;s where the
+              creativity is for me.
             </p>
             <p>
-              The campaigns I’m most proud of earned placements in some of the
-              most competitive publications in the world — not through mass
-              outreach, but through the right idea, the right data, and the right
-              journalist.
+              I&apos;ve worked with brands of all sizes, helping them earn coverage
+              and build visibility in markets and publications that actually matter
+              for their business. That work has resulted in links and brand mentions
+              in Forbes, Bloomberg, USA Today, Fox News, Daily Mail, New York
+              Post, Time Out, Martha Stewart, and Quartz, among others.
+            </p>
+            <p>
+              If you&apos;d like to talk about working together, I&apos;d love to
+              hear from you.
             </p>
           </div>
 
@@ -68,9 +67,9 @@ export default function AboutPage() {
             {[
               { stat: "6+", label: "Years in digital PR" },
               { stat: "8+", label: "Industries covered" },
-              { stat: "4 markets", label: "US, UK, EU & DACH" },
+              { stat: "5 markets", label: "US, UK, EU, DACH & Australia" },
             ].map((item) => (
-              <div key={item.label} className={`${cardBase} p-8 text-center`}>
+              <div key={item.label} className="card-refined p-8 text-center">
                 <p className="text-3xl font-semibold text-[var(--charcoal)] [font-family:var(--font-cormorant),serif]">
                   {item.stat}
                 </p>
@@ -81,9 +80,7 @@ export default function AboutPage() {
             ))}
           </div>
 
-          <div
-            className={`relative mt-16 max-w-3xl overflow-hidden rounded-[10px] border border-[var(--stone-light)] bg-[var(--rose-tint)] px-8 py-10 shadow-soft-terra`}
-          >
+          <div className="relative mt-16 max-w-3xl overflow-hidden rounded-[12px] border border-[var(--border-warm)] bg-[var(--rose-tint)] px-8 py-10">
             <div
               className="absolute left-0 top-0 h-full w-1 bg-[var(--dusty-rose)]/45"
               aria-hidden
@@ -93,16 +90,11 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div
-            className={`mt-20 ${cardBase} px-8 py-12 text-center md:px-14`}
-          >
-            <h2 className="text-xl font-bold text-[var(--charcoal)] md:text-[1.625rem]">
+          <div className="card-refined mt-20 px-8 py-12 text-center md:px-14">
+            <h2 className="text-xl font-medium text-[var(--charcoal)] md:text-[1.625rem]">
               Want to work together?
             </h2>
-            <a
-              href={EMAIL}
-              className="mt-8 inline-flex items-center justify-center rounded-[5px] bg-[var(--terracotta)] px-8 py-3.5 text-[15px] font-bold text-[var(--white)] transition-colors hover:bg-[var(--deep-terra)]"
-            >
+            <a href={EMAIL} className="btn-primary mt-8 px-8 py-3.5">
               Get in touch
             </a>
           </div>
