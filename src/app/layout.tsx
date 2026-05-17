@@ -29,8 +29,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
-      <body className={`${cormorant.variable} ${dmSans.variable}`}>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${cormorant.variable} ${dmSans.variable}`}
+      suppressHydrationWarning
+    >
+      <body className={dmSans.className} suppressHydrationWarning>
         <Header />
         {children}
         <Footer />

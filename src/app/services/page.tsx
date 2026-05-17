@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Section } from "@/components/Section";
 import { services } from "@/data/services";
-
-const EMAIL = "mailto:gjataluarda@gmail.com";
 
 export const metadata: Metadata = {
   title: "Digital PR Services | Luarda Gjata",
@@ -12,12 +11,10 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   return (
-    <main>
+    <main className="bg-cream">
       <Section className="pb-16 pt-16 md:pb-24 md:pt-24">
-        <h1 className="text-[clamp(2rem,4vw,2.625rem)] font-semibold leading-tight text-[var(--charcoal)] [font-family:var(--font-cormorant),serif]">
-          Digital PR services
-        </h1>
-        <p className="mt-8 max-w-2xl text-[17px] leading-relaxed text-[var(--stone)]">
+        <h1 className="type-page-headline">Digital PR services</h1>
+        <p className="type-body mt-8 max-w-2xl">
           I work with brands and agencies who want digital PR that’s grounded in
           insight, built around a strong idea, and executed all the way through
           to coverage.
@@ -27,28 +24,28 @@ export default function ServicesPage() {
           {services.map((service, index) => (
             <article
               key={service.title}
-              className="card-refined border-l-[3px] border-l-[var(--accent-mid)] p-7 md:px-7 md:py-8"
+              className="card-refined border-l-[3px] border-l-accent-mid"
             >
-              <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent-primary)]">
+              <span className="type-label text-accent-primary">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <h2 className="mt-4 text-xl font-semibold text-[var(--charcoal)] [font-family:var(--font-cormorant),serif]">
+              <h2 className="type-section-title mt-4 text-lg md:text-xl">
                 {service.title}
               </h2>
-              <p className="mt-4 text-[17px] leading-relaxed text-[var(--stone)]">
+              <p className="type-body mt-4">
                 {service.description}
               </p>
             </article>
           ))}
         </div>
 
-        <div className="card-refined mt-20 px-8 py-12 text-center md:px-14">
-          <h2 className="text-xl font-medium text-[var(--charcoal)] md:text-[1.625rem]">
+        <div className="card-refined mt-20 text-center">
+          <h2 className="type-section-title">
             Need support with your next campaign?
           </h2>
-          <a href={EMAIL} className="btn-primary mt-8 px-8 py-3.5">
+          <Link href="/contact" className="btn-primary mt-8 px-8 py-3.5">
             Get in touch
-          </a>
+          </Link>
         </div>
       </Section>
     </main>

@@ -4,20 +4,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-const EMAIL = "mailto:gjataluarda@gmail.com";
-
 /** Order matches design concept wireframe: About · Services · Work · Contact */
 const navItems = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Work", href: "/portfolio" },
-  { label: "Contact", href: EMAIL },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
 function NavUnderline({ active }: { active: boolean }) {
   return (
     <span
-      className="pointer-events-none absolute bottom-0 left-0 h-[2px] w-full origin-left rounded-full bg-[var(--accent-primary)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+      className="pointer-events-none absolute bottom-0 left-0 h-[2px] w-full origin-left rounded-full bg-accent-primary transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
       style={{ transform: active ? "scaleX(1)" : "scaleX(0)" }}
       aria-hidden
     />
@@ -28,51 +26,20 @@ type NavItemProps = {
   href: string;
   label: string;
   active: boolean;
-  onMailtoClick?: () => void;
-  onInternalClick?: () => void;
+  onNavigate?: () => void;
   variant: "desktop" | "mobile";
 };
 
-function NavItem({
-  href,
-  label,
-  active,
-  onMailtoClick,
-  onInternalClick,
-  variant,
-}: NavItemProps) {
-  const isMail = href.startsWith("mailto:");
-
+function NavItem({ href, label, active, onNavigate, variant }: NavItemProps) {
   const desktopClass =
-    "relative inline-block pb-1 text-sm font-medium text-[var(--stone)] transition-colors hover:text-[var(--charcoal)]";
+    "relative inline-block pb-1 text-[0.9375rem] leading-snug font-normal text-stone transition-colors hover:text-charcoal";
   const mobileClass =
-    "relative inline-block w-fit rounded-[5px] px-2 py-3 text-base font-medium text-[var(--stone)] transition-colors hover:bg-[var(--terra-tint)] hover:text-[var(--charcoal)]";
+    "relative inline-block w-fit rounded-[var(--radius-button)] px-2 py-3 text-[1rem] leading-snug font-normal text-stone transition-colors hover:bg-accent-light hover:text-charcoal";
 
   const className = variant === "desktop" ? desktopClass : mobileClass;
 
-  if (isMail) {
-    return (
-      <a
-        href={href}
-        className={className}
-        onClick={() => {
-          onMailtoClick?.();
-        }}
-      >
-        <span className="relative z-0">{label}</span>
-        <NavUnderline active={active} />
-      </a>
-    );
-  }
-
   return (
-    <Link
-      href={href}
-      className={className}
-      onClick={() => {
-        onInternalClick?.();
-      }}
-    >
+    <Link href={href} className={className} onClick={onNavigate}>
       <span className="relative z-0">{label}</span>
       <NavUnderline active={active} />
     </Link>
@@ -82,61 +49,40 @@ function NavItem({
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [contactActive, setContactActive] = useState(false);
-  const [prevPathname, setPrevPathname] = useState(pathname);
 
-  if (pathname !== prevPathname) {
-    setPrevPathname(pathname);
-    setContactActive(false);
-  }
-
-  function isItemActive(href: string): boolean {
-    if (contactActive) {
-      return href.startsWith("mailto:");
-    }
-    if (href.startsWith("mailto:")) {
-      return false;
-    }
-    return pathname === href;
+  function closeMenu() {
+    setOpen(false);
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--border-warm)] bg-[color-mix(in_srgb,var(--white)_93%,transparent)] backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-rule bg-white/95 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4">
         <Link
           href="/"
-          className="text-xl font-semibold tracking-tight text-[var(--charcoal)] [font-family:var(--font-cormorant),serif]"
+          className="type-page-headline text-2xl tracking-tight md:text-[1.75rem]"
         >
           Luarda Gjata
         </Link>
 
-        <nav
-          className="hidden items-center gap-8 md:flex"
-          aria-label="Main"
-        >
+        <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
           {navItems.map((item) => (
             <NavItem
               key={item.label}
               href={item.href}
               label={item.label}
-              active={isItemActive(item.href)}
+              active={pathname === item.href}
               variant="desktop"
-              onMailtoClick={() => setContactActive(true)}
-              onInternalClick={() => setContactActive(false)}
             />
           ))}
         </nav>
 
-        <a
-          href={EMAIL}
-          className="btn-primary hidden px-4 py-2.5 text-sm md:inline-flex"
-        >
+        <Link href="/contact" className="btn-primary hidden px-4 py-2.5 text-sm md:inline-flex">
           Get in touch
-        </a>
+        </Link>
 
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-[5px] border border-[var(--stone-light)] bg-[var(--white)] px-3 py-2 text-sm font-medium text-[var(--charcoal)] md:hidden"
+          className="inline-flex items-center justify-center rounded-[var(--radius-button)] border border-rule bg-white px-3 py-2 text-[0.9375rem] font-normal text-charcoal md:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -146,7 +92,7 @@ export function Header() {
       </div>
 
       {open ? (
-        <div className="border-t border-[var(--stone-light)] bg-[var(--cream)] md:hidden">
+        <div className="border-t border-rule bg-cream md:hidden">
           <nav
             className="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-4"
             aria-label="Mobile"
@@ -156,25 +102,18 @@ export function Header() {
                 key={item.label}
                 href={item.href}
                 label={item.label}
-                active={isItemActive(item.href)}
+                active={pathname === item.href}
                 variant="mobile"
-                onMailtoClick={() => {
-                  setContactActive(true);
-                  setOpen(false);
-                }}
-                onInternalClick={() => {
-                  setContactActive(false);
-                  setOpen(false);
-                }}
+                onNavigate={closeMenu}
               />
             ))}
-            <a
-              href={EMAIL}
+            <Link
+              href="/contact"
               className="btn-primary mt-2 px-4 py-3 text-center text-sm"
-              onClick={() => setOpen(false)}
+              onClick={closeMenu}
             >
               Get in touch
-            </a>
+            </Link>
           </nav>
         </div>
       ) : null}

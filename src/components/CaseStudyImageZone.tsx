@@ -10,7 +10,7 @@ function PhotoIcon() {
       height="28"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="#C4B49A"
+      stroke="#C17B5C"
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -44,17 +44,17 @@ export function CaseStudyImageZone({
             className="h-full w-full object-cover"
           />
           <div
-            className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[var(--charcoal)]/0 transition-colors duration-200 group-hover:bg-[var(--charcoal)]/45"
+            className="pointer-events-none absolute inset-0 flex items-center justify-center bg-charcoal/0 transition-colors duration-200 group-hover:bg-charcoal/45"
             aria-hidden
           >
-            <span className="rounded-full bg-[var(--white)] px-4 py-2 text-xs font-medium text-[var(--charcoal)] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+            <span className="rounded-full bg-white px-4 py-2 text-xs font-medium text-charcoal opacity-0 transition-opacity duration-200 group-hover:opacity-100">
               Change image
             </span>
           </div>
         </>
       ) : (
         <div
-          className="flex h-full w-full cursor-default items-center justify-center bg-[#F0EDE9] transition-colors duration-200 group-hover:bg-[#E8DDD4]"
+          className="flex h-full w-full cursor-default items-center justify-center bg-stone-light transition-colors duration-200 group-hover:bg-accent-light"
           aria-hidden
         >
           <PhotoIcon />

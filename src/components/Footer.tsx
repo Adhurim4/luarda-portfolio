@@ -1,44 +1,42 @@
 import Link from "next/link";
-import { LINKEDIN_URL } from "@/config/site";
-
-const EMAIL = "mailto:gjataluarda@gmail.com";
+import { CONTACT_EMAIL, CONTACT_MAILTO, LINKEDIN_URL } from "@/config/site";
 const YEAR = new Date().getFullYear();
 
 const links = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Work", href: "/portfolio" },
-  { label: "Contact", href: EMAIL },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
 export function Footer() {
   return (
-    <footer className="mt-auto border-t border-[var(--stone-light)] bg-[var(--cream)]">
+    <footer className="mt-auto border-t border-rule bg-cream">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-2 md:gap-12">
         <div className="space-y-3">
-          <p className="text-2xl font-semibold text-[var(--charcoal)] [font-family:var(--font-cormorant),serif]">
+          <p className="type-page-headline text-2xl md:text-[1.75rem]">
             Luarda Gjata
           </p>
-          <p className="text-sm text-[var(--stone)]">
+          <p className="type-caption">
             Freelance Digital PR Specialist
           </p>
-          <p className="text-sm text-[var(--stone)]">
-            <span className="text-[var(--charcoal)]">Email:</span>{" "}
+          <p className="type-caption">
+            <span className="text-charcoal">Email:</span>{" "}
             <a
-              href={EMAIL}
-              className="transition-colors hover:text-[var(--charcoal)]"
+              href={CONTACT_MAILTO}
+              className="transition-colors hover:text-charcoal"
             >
-              gjataluarda@gmail.com
+              {CONTACT_EMAIL}
             </a>
           </p>
           {LINKEDIN_URL ? (
-            <p className="text-sm text-[var(--stone)]">
-              <span className="text-[var(--charcoal)]">LinkedIn:</span>{" "}
+            <p className="type-caption">
+              <span className="text-charcoal">LinkedIn:</span>{" "}
               <a
                 href={LINKEDIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-colors hover:text-[var(--charcoal)]"
+                className="transition-colors hover:text-charcoal"
               >
                 Profile
               </a>
@@ -50,35 +48,26 @@ export function Footer() {
           className="flex flex-col gap-3 md:items-end md:text-right"
           aria-label="Footer"
         >
-          <p className="text-xs font-medium uppercase tracking-wider text-[var(--stone)]">
+          <p className="type-label text-stone">
             Navigate
           </p>
           <ul className="flex flex-col gap-2 md:items-end">
             {links.map((item) => (
               <li key={item.label}>
-                {item.href.startsWith("mailto:") ? (
-                  <a
-                    href={item.href}
-                    className="text-sm text-[var(--stone)] transition-colors hover:text-[var(--charcoal)]"
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <Link
-                    href={item.href}
-                    className="text-sm text-[var(--stone)] transition-colors hover:text-[var(--charcoal)]"
-                  >
-                    {item.label}
-                  </Link>
-                )}
+                <Link
+                  href={item.href}
+                  className="type-nav text-stone transition-colors hover:text-charcoal"
+                >
+                  {item.label}
+                </Link>
               </li>
             ))}
           </ul>
         </nav>
       </div>
 
-      <div className="border-t border-[var(--stone-light)] bg-[var(--white)]">
-        <p className="mx-auto max-w-6xl px-5 py-6 text-center text-xs text-[var(--stone)]">
+      <div className="border-t border-rule bg-white">
+        <p className="type-caption mx-auto max-w-6xl px-5 py-6 text-center">
           © {YEAR} Luarda Gjata. All rights reserved.
         </p>
       </div>

@@ -27,10 +27,10 @@ export function PortfolioGrid() {
             key={f.id}
             type="button"
             onClick={() => setActiveFilter(f.id)}
-            className={`rounded-full border px-4 py-2 text-[13px] font-medium transition-colors ${
+            className={`type-nav rounded-[var(--radius-button)] border px-4 py-2 font-medium transition-colors ${
               activeFilter === f.id
-                ? "border-[var(--accent-primary)] bg-[var(--accent-primary)] text-[var(--white)]"
-                : "border-[var(--border-warm)] bg-[var(--white)] text-[var(--stone)] hover:bg-[var(--accent-light)]"
+                ? "border-accent-primary bg-accent-primary text-white"
+                : "border-rule bg-white text-stone hover:bg-accent-light"
             }`}
           >
             {f.label}

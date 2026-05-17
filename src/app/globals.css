@@ -1,103 +1,267 @@
 @import "tailwindcss";
 
+@source "../**/*.{js,ts,jsx,tsx}";
+
+/* Design tokens — brief palette */
 :root {
-  --cream: #fafaf7;
-  --white: #ffffff;
-  --charcoal: #2c2825;
-  --stone: #7a7a7a;
-  --accent-primary: #9a5c40;
-  --accent-hover: #7a4530;
-  --accent-mid: #c17b5c;
-  --accent-light: #f5ebe4;
-  --stone-light: #f0ede9;
-  --border-warm: #e0d9d4;
-  --rose-tint: #f7efef;
-  --dusty-rose: #c4939f;
-  --image-placeholder: #f0ede9;
-  --image-placeholder-hover: #e8ddd4;
-  --ink: #2c2825;
-
-  /* Legacy aliases */
-  --terracotta: var(--accent-primary);
-  --deep-terra: var(--accent-primary);
-  --terra-tint: var(--accent-light);
+  --cream: #fafaf7; /* page background */
+  --white: #ffffff; /* card / nav */
+  --charcoal: #2c2825; /* body text & headlines */
+  --stone: #7a7a7a; /* secondary text */
+  --accent-primary: #9a5c40; /* primary accent */
+  --accent-hover: #7a4530; /* button hover */
+  --accent-mid: #c17b5c; /* accent dark / pill borders */
+  --accent-light: #f5ebe4; /* pills, card hover, bands */
+  --stone-light: #f0ede9; /* section band */
+  --border-warm: #e0d9d4; /* borders & rules */
+  --ink: #2c2825; /* coverage strip (same as charcoal) */
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+@theme inline {
+  --color-cream: #fafaf7;
+  --color-white: #ffffff;
+  --color-charcoal: #2c2825;
+  --color-stone: #7a7a7a;
+  --color-accent-primary: #9a5c40;
+  --color-accent-hover: #7a4530;
+  --color-accent-mid: #c17b5c;
+  --color-accent-light: #f5ebe4;
+  --color-stone-light: #f0ede9;
+  --color-rule: #e0d9d4;
+  --color-ink: #2c2825;
+
+  --text-label: 0.6875rem;
+  --text-caption: 0.8125rem;
+  --text-body: 1.0625rem;
+  --text-button: 0.9375rem;
+  --text-section: 1.375rem;
+  --text-section-lg: 1.625rem;
+  --text-nav: 0.8125rem;
+  --text-hero: clamp(3.25rem, 5vw, 3.75rem);
+  --text-page: clamp(2.25rem, 4vw, 2.625rem);
+
+  --radius-card: 12px;
+  --radius-button: 5px;
+
+  --font-display: var(--font-cormorant), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
 }
 
-html {
-  scroll-behavior: smooth;
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    font-size: var(--text-body);
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-cormorant), Georgia, serif;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
-body {
-  margin: 0;
-  background: var(--cream);
-  color: var(--charcoal);
-  font-family: var(--font-dm-sans), sans-serif;
-}
+@layer components {
+  /* Typography */
+  .type-hero {
+    font-family: var(--font-cormorant), Georgia, serif;
+    font-size: var(--text-hero);
+    font-weight: 400;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--charcoal);
+  }
 
-h1 {
-  font-family: var(--font-cormorant), serif;
-}
+  .type-page-headline {
+    font-family: var(--font-cormorant), Georgia, serif;
+    font-size: var(--text-page);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--charcoal);
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+  .type-section-title {
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    font-size: var(--text-section);
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--charcoal);
+  }
 
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  background: var(--accent-primary);
-  color: var(--white);
-  font-size: 15px;
-  font-weight: 500;
-  transition: background 0.2s ease;
-}
+  @media (min-width: 768px) {
+    .type-section-title {
+      font-size: var(--text-section-lg);
+    }
+  }
 
-.btn-primary:hover {
-  background: var(--accent-hover);
-}
+  .type-body {
+    font-size: var(--text-body);
+    font-weight: 400;
+    line-height: 1.65;
+    color: var(--charcoal);
+  }
 
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  border: 1px solid var(--accent-primary);
-  background: transparent;
-  color: var(--accent-primary);
-  font-size: 15px;
-  font-weight: 500;
-  transition: background 0.2s ease;
-}
+  .type-nav {
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    font-size: var(--text-nav);
+    font-weight: 400;
+  }
 
-.btn-ghost:hover {
-  background: var(--accent-light);
-}
+  .type-label {
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    font-size: var(--text-label);
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
 
-.card-refined {
-  border-radius: 12px;
-  border: 0.5px solid var(--border-warm);
-  background: var(--white);
-  transition: background 0.2s ease;
-}
+  .type-caption {
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    font-size: var(--text-caption);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--stone);
+  }
 
-.card-refined:hover {
-  background: var(--accent-light);
-}
+  /* Buttons */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-button);
+    border: none;
+    background: var(--accent-primary);
+    color: var(--white);
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    font-size: var(--text-button);
+    font-weight: 500;
+    transition: background 0.2s ease;
+  }
 
-.pill-availability {
-  border-radius: 20px;
-  border: 0.5px solid var(--accent-mid);
-  background: var(--accent-light);
-  color: var(--accent-primary);
+  .btn-primary:hover {
+    background: var(--accent-hover);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-button);
+    border: 1px solid var(--accent-primary);
+    background: transparent;
+    color: var(--accent-primary);
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    font-size: var(--text-button);
+    font-weight: 500;
+    transition: background 0.2s ease;
+  }
+
+  .btn-ghost:hover {
+    background: var(--accent-light);
+  }
+
+  /* Availability pill */
+  .pill-availability {
+    display: inline-flex;
+    border-radius: 20px;
+    border: 0.5px solid var(--accent-mid);
+    background: var(--accent-light);
+    color: var(--accent-primary);
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    font-size: var(--text-label);
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  /* Cards */
+  .card-refined {
+    border-radius: var(--radius-card);
+    border: 0.5px solid var(--border-warm);
+    background: var(--white);
+    padding: 1.5rem 1.75rem;
+    transition: background 0.2s ease;
+  }
+
+  .card-refined:hover {
+    background: var(--accent-light);
+  }
+
+  .card-refined--flush {
+    padding: 0;
+  }
+
+  .card-refined--flush:hover {
+    background: var(--white);
+  }
+
+  .card-refined--flush:hover .card-refined__body {
+    background: var(--accent-light);
+  }
+
+  /* Coverage strip */
+  .coverage-strip {
+    background: var(--ink);
+  }
+
+  .coverage-strip__outlet {
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    font-size: var(--text-nav);
+    font-weight: 700;
+    color: var(--white);
+    white-space: nowrap;
+  }
+
+  /* Contact form fields */
+  .contact-field {
+    width: 100%;
+    border-radius: var(--radius-button);
+    border: 0.5px solid var(--border-warm);
+    background: var(--white);
+    padding: 0.75rem 1rem;
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    font-size: var(--text-body);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--charcoal);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .contact-field::placeholder {
+    color: var(--stone);
+  }
+
+  .contact-field:focus {
+    outline: none;
+    border-color: var(--accent-mid);
+    box-shadow: 0 0 0 2px rgb(154 92 64 / 15%);
+  }
+
+  .contact-field:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
 }
 
 @keyframes fade-in-soft {
@@ -111,8 +275,10 @@ a {
   }
 }
 
-.animate-fade-soft {
-  animation: fade-in-soft 300ms ease forwards;
+@layer utilities {
+  .animate-fade-soft {
+    animation: fade-in-soft 300ms ease forwards;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
