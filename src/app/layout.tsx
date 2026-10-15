@@ -21,6 +21,17 @@ export const metadata: Metadata = {
   title: "Luarda Gjata | Freelance Digital PR Specialist",
   description:
     "Freelance digital PR specialist turning data into stories and stories into coverage across US, UK, EU and DACH markets.",
+  // Private portfolio: shared by direct link only, never indexed by search engines.
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+    },
+  },
 };
 
 export default function RootLayout({
