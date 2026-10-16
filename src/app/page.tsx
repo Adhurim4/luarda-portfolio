@@ -132,7 +132,7 @@ export default function Home() {
           {featured.map((study) => (
             <Link
               key={study.slug}
-              href={`/portfolio/${study.slug}`}
+              href={`/portfolio?case=${study.slug}`}
               className="card-refined group block"
             >
               <p className="type-label text-accent-primary">{study.type}</p>

@@ -1,12 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   portfolioFilters,
   type CaseStudy,
   type PortfolioFilter,
 } from "@/data/caseStudies";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
+import { CaseStudyModal } from "@/components/CaseStudyModal";
 
 export type PortfolioItem = {
   study: CaseStudy;
@@ -15,6 +16,24 @@ export type PortfolioItem = {
 
 export function PortfolioGrid({ items }: { items: PortfolioItem[] }) {
   const [activeFilter, setActiveFilter] = useState<PortfolioFilter>("All");
+  const [selected, setSelected] = useState<PortfolioItem | null>(null);
+
+  // Open a case study directly from a link like /portfolio?case=<slug>
+  useEffect(() => {
+    const slug = new URLSearchParams(window.location.search).get("case");
+    if (!slug) return;
+    const match = items.find(({ study }) => study.slug === slug);
+    if (!match) return;
+    const frame = requestAnimationFrame(() => setSelected(match));
+    return () => cancelAnimationFrame(frame);
+  }, [items]);
+
+  const closeModal = useCallback(() => {
+    setSelected(null);
+    if (window.location.search) {
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+  }, []);
 
   const filtered = useMemo(() => {
     if (activeFilter === "All") return items;
@@ -42,10 +61,21 @@ export function PortfolioGrid({ items }: { items: PortfolioItem[] }) {
       </div>
 
       <div className="mt-12 grid gap-8 md:grid-cols-2">
-        {filtered.map(({ study, imageUrl }) => (
-          <CaseStudyCard key={study.slug} study={study} imageUrl={imageUrl} />
+        {filtered.map((item) => (
+          <CaseStudyCard
+            key={item.study.slug}
+            study={item.study}
+            imageUrl={item.imageUrl}
+            onOpen={() => setSelected(item)}
+          />
         ))}
       </div>
+
+      <CaseStudyModal
+        study={selected?.study ?? null}
+        imageUrl={selected?.imageUrl}
+        onClose={closeModal}
+      />
     </>
   );
 }

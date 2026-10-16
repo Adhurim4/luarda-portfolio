@@ -1,4 +1,5 @@
-import Link from "next/link";
+"use client";
+
 import type { CaseStudy } from "@/data/caseStudies";
 import { CaseStudyImageZone } from "@/components/CaseStudyImageZone";
 import { CaseStudyTags } from "@/components/CaseStudyTags";
@@ -6,13 +7,15 @@ import { CaseStudyTags } from "@/components/CaseStudyTags";
 type CaseStudyCardProps = {
   study: CaseStudy;
   imageUrl?: string;
+  onOpen: () => void;
 };
 
-export function CaseStudyCard({ study, imageUrl }: CaseStudyCardProps) {
+export function CaseStudyCard({ study, imageUrl, onOpen }: CaseStudyCardProps) {
   return (
-    <Link
-      href={`/portfolio/${study.slug}`}
-      className="card-refined card-refined--flush group flex flex-col overflow-hidden"
+    <button
+      type="button"
+      onClick={onOpen}
+      className="card-refined card-refined--flush group flex flex-col overflow-hidden text-left"
     >
       <CaseStudyImageZone imageUrl={imageUrl} alt={study.title} />
 
@@ -48,6 +51,6 @@ export function CaseStudyCard({ study, imageUrl }: CaseStudyCardProps) {
           Read case study →
         </span>
       </div>
-    </Link>
+    </button>
   );
 }
