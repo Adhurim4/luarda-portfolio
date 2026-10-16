@@ -63,7 +63,11 @@ export function CaseStudyModal({ study, imageUrl, onClose }: CaseStudyModalProps
           Close
         </button>
 
-        <CaseStudyImageZone imageUrl={imageUrl} alt={study.title} />
+        <CaseStudyImageZone
+          imageUrl={imageUrl}
+          alt={study.title}
+          variant="natural"
+        />
 
         <div className="px-7 py-8 md:px-10">
           <CaseStudyTags study={study} />

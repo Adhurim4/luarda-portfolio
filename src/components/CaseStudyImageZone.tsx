@@ -2,6 +2,9 @@ type CaseStudyImageZoneProps = {
   imageUrl?: string;
   alt?: string;
   className?: string;
+  /** "frame": fixed 16:9 frame with the whole image fitted inside it.
+   *  "natural": the whole image at its own proportions. */
+  variant?: "frame" | "natural";
 };
 
 function PhotoIcon() {
@@ -25,14 +28,24 @@ function PhotoIcon() {
 }
 
 /**
- * 16:9 image zone. Shows the cover image (object-fit: cover) or a neutral
- * placeholder tile when no image has been uploaded.
+ * Case study image. The whole image is always visible (never cropped).
+ * Shows a neutral placeholder tile when no image has been uploaded.
  */
 export function CaseStudyImageZone({
   imageUrl,
   alt = "",
   className = "rounded-t-[12px]",
+  variant = "frame",
 }: CaseStudyImageZoneProps) {
+  if (imageUrl && variant === "natural") {
+    return (
+      <div className={`w-full overflow-hidden bg-stone-light ${className}`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={imageUrl} alt={alt} className="block h-auto w-full" />
+      </div>
+    );
+  }
+
   return (
     <div
       className={`relative w-full overflow-hidden ${className}`}
@@ -40,7 +53,11 @@ export function CaseStudyImageZone({
     >
       {imageUrl ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={imageUrl} alt={alt} className="h-full w-full object-cover" />
+        <img
+          src={imageUrl}
+          alt={alt}
+          className="h-full w-full bg-stone-light object-contain"
+        />
       ) : (
         <div
           className="flex h-full w-full items-center justify-center bg-stone-light"
