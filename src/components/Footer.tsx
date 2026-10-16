@@ -18,7 +18,7 @@ export function Footer() {
             Luarda Gjata
           </p>
           <p className="type-caption">
-            Freelance Digital PR Specialist
+            Digital PR Specialist
           </p>
           <p className="type-caption">
             <span className="text-charcoal">Email:</span>{" "}
@@ -29,19 +29,16 @@ export function Footer() {
               {CONTACT_EMAIL}
             </a>
           </p>
-          {LINKEDIN_URL ? (
-            <p className="type-caption">
-              <span className="text-charcoal">LinkedIn:</span>{" "}
-              <a
-                href={LINKEDIN_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-colors hover:text-charcoal"
-              >
-                Profile
-              </a>
-            </p>
-          ) : null}
+          <p className="type-caption">
+            <a
+              href={LINKEDIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-charcoal"
+            >
+              LinkedIn
+            </a>
+          </p>
         </div>
 
         <nav

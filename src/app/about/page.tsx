@@ -7,7 +7,7 @@ import { SectionWaveDivider } from "@/components/SectionWaveDivider";
 export const metadata: Metadata = {
   title: "About Luarda Gjata | Digital PR Specialist",
   description:
-    "Learn more about Luarda Gjata, a freelance digital PR specialist working across tech, cybersecurity, lifestyle, food, travel and international markets.",
+    "Learn more about Luarda Gjata, a digital PR specialist with 6+ years of experience running data-led campaigns across the US, UK, Europe, and Australia.",
 };
 
 export default function AboutPage() {
@@ -21,24 +21,14 @@ export default function AboutPage() {
         <div className="relative z-0 grid gap-6 sm:grid-cols-3">
           {[
             { stat: "6+", label: "Years in digital PR" },
-            { stat: "8+", label: "Industries covered" },
-            { stat: "5 markets", label: "US, UK, EU, DACH & Australia" },
+            { stat: "9", label: "Industries covered" },
+            { stat: "4", label: "Markets: US, UK, Europe & Australia" },
           ].map((item) => (
             <div key={item.label} className="card-refined text-center">
               <p className="type-page-headline text-3xl md:text-4xl">{item.stat}</p>
               <p className="type-caption mt-2">{item.label}</p>
             </div>
           ))}
-        </div>
-
-        <div className="card-refined relative mt-16 max-w-3xl overflow-hidden bg-accent-light">
-          <div
-            className="absolute left-0 top-0 h-full w-1 bg-accent-mid/45"
-            aria-hidden
-          />
-          <p className="relative text-center type-body italic">
-            Testimonial coming soon.
-          </p>
         </div>
 
         <div className="card-refined mt-20 text-center">

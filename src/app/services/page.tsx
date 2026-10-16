@@ -6,7 +6,7 @@ import { services } from "@/data/services";
 export const metadata: Metadata = {
   title: "Digital PR Services | Luarda Gjata",
   description:
-    "Digital PR services including campaign ideation, data strategy, media outreach, international campaigns, consultancy and team training.",
+    "Digital PR services from Luarda Gjata: campaign ideation, data strategy, media outreach, international campaigns, consultancy, and team training.",
 };
 
 export default function ServicesPage() {
@@ -15,9 +15,9 @@ export default function ServicesPage() {
       <Section className="pb-16 pt-16 md:pb-24 md:pt-24">
         <h1 className="type-page-headline">Digital PR services</h1>
         <p className="type-body mt-8 max-w-2xl">
-          I work with brands and agencies who want digital PR that’s grounded in
-          insight, built around a strong idea, and executed all the way through
-          to coverage.
+          I work with brands and agencies that want digital PR grounded in
+          insight, built around a strong idea, and carried all the way through to
+          coverage.
         </p>
 
         <div className="mt-14 grid gap-6 md:grid-cols-2">
@@ -43,6 +43,10 @@ export default function ServicesPage() {
           <h2 className="type-section-title">
             Need support with your next campaign?
           </h2>
+          <p className="type-body mx-auto mt-6 max-w-2xl">
+            Tell me what you&apos;re working on and I&apos;ll let you know how I can
+            help.
+          </p>
           <Link href="/contact" className="btn-primary mt-8 px-8 py-3.5">
             Get in touch
           </Link>

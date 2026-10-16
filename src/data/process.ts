@@ -9,7 +9,7 @@ export const processSteps = [
     number: "02",
     title: "Data & research",
     description:
-      "Gathering and analysing the data that gives a story credibility and makes it impossible to ignore.",
+      "Gathering and analysing the data that gives a story credibility.",
   },
   {
     number: "03",
@@ -21,7 +21,7 @@ export const processSteps = [
     number: "04",
     title: "Targeted outreach",
     description:
-      "Personalised pitches to the right journalists — not mass emails.",
+      "Personalised pitches to the right journalists, never mass emails.",
   },
   {
     number: "05",
@@ -33,6 +33,6 @@ export const processSteps = [
     number: "06",
     title: "Reporting",
     description:
-      "Clear reporting focused on what moved the needle — and why.",
+      "Clear reporting on what moved the needle, and why.",
   },
 ];

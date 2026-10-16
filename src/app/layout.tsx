@@ -18,9 +18,9 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://luardagjata.com"),
-  title: "Luarda Gjata | Freelance Digital PR Specialist",
+  title: "Luarda Gjata | Digital PR Specialist",
   description:
-    "Freelance digital PR specialist turning data into stories and stories into coverage across US, UK, EU and DACH markets.",
+    "Digital PR specialist turning data into stories and earning coverage across the US, UK, Europe, and Australia.",
   // Private portfolio: shared by direct link only, never indexed by search engines.
   robots: {
     index: false,

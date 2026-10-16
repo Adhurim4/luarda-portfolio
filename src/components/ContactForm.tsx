@@ -135,7 +135,7 @@ export function ContactForm() {
   if (status === "success") {
     return (
       <div className="card-refined border-accent-mid/40 bg-accent-light">
-        <p className="type-section-title text-lg">Thank you — message sent.</p>
+        <p className="type-section-title text-lg">Thank you, message sent.</p>
         <p className="type-body mt-3">
           I&apos;ll get back to you as soon as I can. If it&apos;s urgent, you can
           also reach me at{" "}

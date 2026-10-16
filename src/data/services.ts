@@ -2,26 +2,26 @@ export const services = [
   {
     title: "End-to-end digital PR campaigns",
     description:
-      "From the first brainstorm to the final report — ideation, data gathering, asset creation, outreach, promotion, and measurement. I run the full thing.",
+      "From the first brainstorm to the final report, I run the whole campaign. That covers ideation, data gathering, asset creation, outreach, promotion, and measurement.",
   },
   {
-    title: "Campaign ideation & data strategy",
+    title: "Campaign ideation and data strategy",
     description:
-      "Need the idea and the data backbone before execution? I’ll find the angle, identify the research, and shape a story that journalists want to cover.",
+      "Need the idea and the data before execution? I find the angle, identify the research behind it, and shape a story journalists want to cover. A good fit if your team handles the rest.",
   },
   {
-    title: "Media relations & targeted outreach",
+    title: "Media relations and targeted outreach",
     description:
-      "Personalised pitches to the right journalists, in the right markets, at the right time.",
+      "Personalised pitches to the right journalists, in the right markets, at the right time. No mass emails.",
   },
   {
     title: "International market campaigns",
     description:
-      "Campaigns adapted for US, UK, EU, and DACH audiences. Different markets, different media cultures — I know the nuance.",
+      "Campaigns adapted for audiences in the US, UK, Europe (including the DACH region), and Australia. Every market has its own media culture, and I tailor the story to fit each one.",
   },
   {
-    title: "Digital PR consultancy & team training",
+    title: "Digital PR consultancy and team training",
     description:
-      "For agencies building or scaling their digital PR offering. I’ve trained outreach teams through this transition before — from mindset to execution.",
+      "Support for agencies building or scaling their digital PR offering. I've helped an outreach team move from traditional link building to insight-led digital PR, covering both mindset and execution.",
   },
 ];

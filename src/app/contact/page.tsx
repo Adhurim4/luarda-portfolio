@@ -6,7 +6,7 @@ import { CONTACT_EMAIL, CONTACT_MAILTO } from "@/config/site";
 export const metadata: Metadata = {
   title: "Contact | Luarda Gjata",
   description:
-    "Get in touch with Luarda Gjata for freelance digital PR campaigns, retainers, and agency partnerships.",
+    "Get in touch with Luarda Gjata for digital PR campaigns, retainers, and agency partnerships.",
 };
 
 export default function ContactPage() {
@@ -17,7 +17,7 @@ export default function ContactPage() {
           <div
             className="relative aspect-[4/5] w-full max-h-[480px] overflow-hidden rounded-[var(--radius-card)] border-[0.5px] border-rule bg-stone-light lg:max-h-none lg:min-h-[420px]"
             role="img"
-            aria-label="Portrait of Luarda Gjata — photo coming soon"
+            aria-label="Portrait of Luarda Gjata, photo coming soon"
           >
             <div className="absolute inset-0 bg-gradient-to-t from-stone-light/80 via-transparent to-accent-light/30" />
             <div className="absolute inset-0 flex items-center justify-center">

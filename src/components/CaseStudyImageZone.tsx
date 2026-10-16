@@ -1,6 +1,7 @@
 type CaseStudyImageZoneProps = {
   imageUrl?: string;
   alt?: string;
+  className?: string;
 };
 
 function PhotoIcon() {
@@ -24,37 +25,25 @@ function PhotoIcon() {
 }
 
 /**
- * 16:10 image zone — brief placeholder styling; not clickable (display only).
+ * 16:9 image zone. Shows the cover image (object-fit: cover) or a neutral
+ * placeholder tile when no image has been uploaded.
  */
 export function CaseStudyImageZone({
   imageUrl,
   alt = "",
+  className = "rounded-t-[12px]",
 }: CaseStudyImageZoneProps) {
   return (
     <div
-      className="group relative w-full overflow-hidden rounded-t-[12px]"
-      style={{ aspectRatio: "16 / 10" }}
+      className={`relative w-full overflow-hidden ${className}`}
+      style={{ aspectRatio: "16 / 9" }}
     >
       {imageUrl ? (
-        <>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={imageUrl}
-            alt={alt}
-            className="h-full w-full object-cover"
-          />
-          <div
-            className="pointer-events-none absolute inset-0 flex items-center justify-center bg-charcoal/0 transition-colors duration-200 group-hover:bg-charcoal/45"
-            aria-hidden
-          >
-            <span className="rounded-full bg-white px-4 py-2 text-xs font-medium text-charcoal opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-              Change image
-            </span>
-          </div>
-        </>
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={imageUrl} alt={alt} className="h-full w-full object-cover" />
       ) : (
         <div
-          className="flex h-full w-full cursor-default items-center justify-center bg-stone-light transition-colors duration-200 group-hover:bg-accent-light"
+          className="flex h-full w-full items-center justify-center bg-stone-light"
           aria-hidden
         >
           <PhotoIcon />

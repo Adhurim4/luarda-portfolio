@@ -2,14 +2,21 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PortfolioGrid } from "@/components/PortfolioGrid";
 import { Section } from "@/components/Section";
+import { caseStudies } from "@/data/caseStudies";
+import { getCaseStudyImageUrl } from "@/lib/caseStudyImages";
 
 export const metadata: Metadata = {
   title: "Digital PR Portfolio | Luarda Gjata",
   description:
-    "Selected digital PR campaigns and case studies from Luarda Gjata, freelance Digital PR specialist.",
+    "Selected digital PR campaigns and case studies from Luarda Gjata, Digital PR specialist.",
 };
 
 export default function PortfolioPage() {
+  const items = caseStudies.map((study) => ({
+    study,
+    imageUrl: getCaseStudyImageUrl(study),
+  }));
+
   return (
     <main className="bg-cream">
       <Section className="pb-16 pt-16 md:pb-24 md:pt-24">
@@ -18,7 +25,7 @@ export default function PortfolioPage() {
         </h1>
 
         <div className="mt-10">
-          <PortfolioGrid />
+          <PortfolioGrid items={items} />
         </div>
 
         <div className="card-refined mt-20 text-center">
