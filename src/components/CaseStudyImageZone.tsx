@@ -2,7 +2,7 @@ type CaseStudyImageZoneProps = {
   imageUrl?: string;
   alt?: string;
   className?: string;
-  /** "frame": fixed 16:9 frame with the whole image fitted inside it.
+  /** "frame": fixed 16:9 frame, filled edge to edge by the image.
    *  "natural": the whole image at its own proportions. */
   variant?: "frame" | "natural";
 };
@@ -28,8 +28,9 @@ function PhotoIcon() {
 }
 
 /**
- * Case study image. The whole image is always visible (never cropped).
- * Shows a neutral placeholder tile when no image has been uploaded.
+ * Case study image. On cards it fills the 16:9 frame; in the popup
+ * ("natural") the whole image is shown uncropped. Shows a neutral
+ * placeholder tile when no image has been uploaded.
  */
 export function CaseStudyImageZone({
   imageUrl,
@@ -53,11 +54,7 @@ export function CaseStudyImageZone({
     >
       {imageUrl ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={imageUrl}
-          alt={alt}
-          className="h-full w-full bg-stone-light object-contain"
-        />
+        <img src={imageUrl} alt={alt} className="h-full w-full object-cover" />
       ) : (
         <div
           className="flex h-full w-full items-center justify-center bg-stone-light"
