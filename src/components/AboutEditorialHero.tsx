@@ -2,12 +2,12 @@ import fs from "node:fs";
 import path from "node:path";
 
 /**
- * Portrait photo. Shown automatically when public/images/luarda-gjata.jpg
- * exists; the photo block is hidden when the file is missing.
+ * Portrait photo: a file inside public/. Shown automatically when the file
+ * exists; the photo block is hidden when it is missing.
  */
-const PHOTO_FILE = "/images/luarda-gjata.jpg";
+const PHOTO_FILE = "WhatsApp Image 2026-10-16 at 12.16.00 PM.jpeg";
 const PHOTO_URL = fs.existsSync(path.join(process.cwd(), "public", PHOTO_FILE))
-  ? PHOTO_FILE
+  ? `/${encodeURIComponent(PHOTO_FILE)}`
   : "";
 
 const ABOUT_PARAGRAPHS = [

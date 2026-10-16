@@ -15,6 +15,6 @@ export function getCaseStudyImageUrl(study: CaseStudy): string | undefined {
     study.image,
   );
   return fs.existsSync(filePath)
-    ? `${CASE_STUDY_IMAGE_DIR}/${study.image}`
+    ? `${CASE_STUDY_IMAGE_DIR}/${encodeURIComponent(study.image)}`
     : undefined;
 }

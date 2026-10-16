@@ -2,8 +2,8 @@
  * Portfolio case studies.
  *
  * To add a campaign: copy one object below, give it a unique `slug`, and fill
- * in the same fields. Put its cover image in `public/images/portfolio/` using
- * the file name in `image`. A missing image shows a neutral placeholder tile.
+ * in the same fields. Put its cover image in `public/` using the file name
+ * in `image`. A missing image shows a neutral placeholder tile.
  * Cards appear on /portfolio in the order of this list, and each one gets its
  * own page at /portfolio/<slug>.
  */
@@ -34,7 +34,7 @@ export type CaseStudy = {
   /** Topics and market. A campaign shows under every filter it is tagged with. */
   tags: CaseStudyTag[];
   title: string;
-  /** File name inside public/images/portfolio/ */
+  /** File name inside public/ */
   image: string;
   /** Headline number on the card, e.g. "500+" */
   resultNumber: string;
@@ -64,7 +64,7 @@ export const portfolioFilters: PortfolioFilter[] = [
   "DACH",
 ];
 
-export const CASE_STUDY_IMAGE_DIR = "/images/portfolio";
+export const CASE_STUDY_IMAGE_DIR = "";
 
 export const caseStudies: CaseStudy[] = [
   {
@@ -72,7 +72,7 @@ export const caseStudies: CaseStudy[] = [
     type: "Data-led campaign",
     tags: ["Relationships", "US"],
     title: "Which US states are the most dangerous for online dating?",
-    image: "dating-states-cover.jpg",
+    image: "Which US states are the most dangerous for online dating_.jpg",
     resultNumber: "500+",
     resultLabel: "backlinks",
     mentions: "100+ brand mentions",
@@ -104,7 +104,7 @@ export const caseStudies: CaseStudy[] = [
     type: "Data-led campaign",
     tags: ["Tech", "Cybersecurity", "Global"],
     title: "Which countries have the most and least internet freedom?",
-    image: "internet-freedom-cover.jpg",
+    image: "Which countries have the most and least internet freedom_.webp",
     resultNumber: "300+",
     resultLabel: "backlinks",
     mentions: "50+ brand mentions",
@@ -136,7 +136,7 @@ export const caseStudies: CaseStudy[] = [
     type: "Data-led campaign",
     tags: ["Travel", "Global"],
     title: "Where does the world want to go for Christmas?",
-    image: "christmas-destinations-cover.jpg",
+    image: "Where does the world want to go for Christmas_.webp",
     resultNumber: "150+",
     resultLabel: "backlinks",
     mentions: "100+ brand mentions",
@@ -168,7 +168,7 @@ export const caseStudies: CaseStudy[] = [
     type: "Data-led campaign",
     tags: ["Relationships", "US"],
     title: "How to meet people to date in 2024",
-    image: "meet-people-to-date-cover.jpg",
+    image: "How to meet people to date in 2024.jpg",
     resultNumber: "150+",
     resultLabel: "backlinks",
     mentions: "40+ brand mentions",
@@ -200,7 +200,7 @@ export const caseStudies: CaseStudy[] = [
     type: "Data-led campaign",
     tags: ["Tech", "US"],
     title: "The top tech cities in the US: ranking 100 cities",
-    image: "tech-cities-cover.jpg",
+    image: "The top tech cities in the US_ ranking 100 cities.jpg",
     resultNumber: "130+",
     resultLabel: "backlinks",
     mentions: "40+ brand mentions",
@@ -232,7 +232,7 @@ export const caseStudies: CaseStudy[] = [
     type: "Data-led campaign",
     tags: ["Tech", "Lifestyle", "US"],
     title: "Top gaming cities: the 100 best US cities for gamers",
-    image: "gaming-cities-cover.jpg",
+    image: "Top gaming cities_ the 100 best US cities for gamers.jpg",
     resultNumber: "120+",
     resultLabel: "backlinks",
     mentions: "30+ brand mentions",
@@ -264,7 +264,7 @@ export const caseStudies: CaseStudy[] = [
     type: "Data-led campaign",
     tags: ["Food", "US"],
     title: "The most popular beers across the US",
-    image: "beers-by-state-cover.jpg",
+    image: "The most popular beers across the US.webp",
     resultNumber: "130+",
     resultLabel: "backlinks",
     mentions: "40+ brand mentions",
@@ -297,7 +297,7 @@ export const caseStudies: CaseStudy[] = [
     tags: ["Travel", "Global"],
     title:
       "The world's most complained-about beaches, ranked by 1.3M reviews",
-    image: "complained-beaches-cover.jpg",
+    image: "The world's most complained-about beaches, ranked by 1.3M reviews.webp",
     resultNumber: "100+",
     resultLabel: "backlinks",
     mentions: "130+ brand mentions",
@@ -330,7 +330,7 @@ export const caseStudies: CaseStudy[] = [
     tags: ["Food", "US"],
     title:
       "The most popular Super Bowl foods and desserts across America",
-    image: "super-bowl-foods-cover.jpg",
+    image: "The most popular Super Bowl foods and desserts across America.webp",
     resultNumber: "100+",
     resultLabel: "backlinks",
     mentions: "30+ brand mentions",
@@ -362,7 +362,7 @@ export const caseStudies: CaseStudy[] = [
     type: "Data-led campaign",
     tags: ["Food", "Lifestyle", "US"],
     title: "America's favorite pumpkin food",
-    image: "pumpkin-food-cover.jpg",
+    image: "America's favorite pumpkin food.webp",
     resultNumber: "60+",
     resultLabel: "backlinks",
     mentions: "10+ brand mentions",
@@ -395,7 +395,7 @@ export const caseStudies: CaseStudy[] = [
     tags: ["Cybersecurity", "Tech", "US"],
     title:
       "Where kids are most and least safe online: state by state rankings",
-    image: "kids-online-safety-cover.jpg",
+    image: "Where kids are most and least safe online_ state by state rankings.jpg",
     resultNumber: "90+",
     resultLabel: "backlinks",
     mentions: "20+ brand mentions",
@@ -428,7 +428,7 @@ export const caseStudies: CaseStudy[] = [
     tags: ["Cybersecurity", "US"],
     title:
       "Identity theft statistics by state: the most and least dangerous US states",
-    image: "identity-theft-cover.jpg",
+    image: "Identity theft statistics by state_ the most and least dangerous US states.webp",
     resultNumber: "80+",
     resultLabel: "backlinks",
     mentions: "5+ brand mentions",
@@ -460,7 +460,7 @@ export const caseStudies: CaseStudy[] = [
     type: "Data-led campaign",
     tags: ["Lifestyle", "Food", "US"],
     title: "How long do you have to work to afford a cup of coffee?",
-    image: "coffee-affordability-cover.jpg",
+    image: "How long do you have to work to afford a cup of coffee_.png",
     resultNumber: "60+",
     resultLabel: "backlinks",
     mentions: "5+ brand mentions",
@@ -493,7 +493,7 @@ export const caseStudies: CaseStudy[] = [
     tags: ["Tech", "Global"],
     title:
       "Netflix prices by country: how long do you need to work to pay for it?",
-    image: "netflix-prices-cover.jpg",
+    image: "Netflix prices by country_ how long do you need to work to pay for it_.webp",
     resultNumber: "40+",
     resultLabel: "backlinks",
     mentions: "20+ brand mentions",
@@ -525,7 +525,7 @@ export const caseStudies: CaseStudy[] = [
     type: "Data-led campaign",
     tags: ["Food", "Lifestyle", "UK"],
     title: "The best UK cities for coffee lovers",
-    image: "uk-coffee-cities-cover.jpg",
+    image: "The best UK cities for coffee lovers.webp",
     resultNumber: "20",
     resultLabel: "backlinks",
     mentions: "20+ brand mentions",
@@ -558,7 +558,7 @@ export const caseStudies: CaseStudy[] = [
     tags: ["Relationships", "Global"],
     title:
       "Gen Z women and men reveal their surprising new preferences for finding love",
-    image: "gen-z-dating-cover.jpg",
+    image: "Gen Z women and men reveal their surprising new preferences for finding love.webp",
     resultNumber: "30+",
     resultLabel: "backlinks",
     mentions: "10+ brand mentions",
@@ -591,7 +591,7 @@ export const caseStudies: CaseStudy[] = [
     tags: ["Tech", "DACH"],
     title:
       "Average internet speed in Germany 2026: the fastest cities for streaming",
-    image: "germany-internet-speed-cover.jpg",
+    image: "Average internet speed in Germany 2026_ the fastest cities for streaming.jpg",
     resultNumber: "10+",
     resultLabel: "backlinks",
     mentions: "20+ brand mentions",
@@ -623,7 +623,7 @@ export const caseStudies: CaseStudy[] = [
     type: "Data-led campaign",
     tags: ["Travel", "DACH"],
     title: "The worst ski resorts in Europe, ranked by guest reviews",
-    image: "europe-ski-resorts-cover.jpg",
+    image: "The worst ski resorts in Europe, ranked by guest reviews.jpg",
     resultNumber: "20+",
     resultLabel: "backlinks",
     mentions: "30+ brand mentions",
@@ -655,7 +655,7 @@ export const caseStudies: CaseStudy[] = [
     type: "Data-led campaign",
     tags: ["Lifestyle", "Finance", "Global"],
     title: "Zodiac signs of America's richest self-made women",
-    image: "zodiac-self-made-women-cover.jpg",
+    image: "Zodiac signs of America's richest self-made women.webp",
     resultNumber: "30+",
     resultLabel: "backlinks",
     mentions: "10+ brand mentions",
@@ -687,7 +687,7 @@ export const caseStudies: CaseStudy[] = [
     type: "Reactive campaign",
     tags: ["Food", "Global"],
     title: "Where does our food come from?",
-    image: "where-food-comes-from-cover.jpg",
+    image: "Where does our food come from_.jpg",
     resultNumber: "50+",
     resultLabel: "backlinks",
     mentions: "20+ brand mentions",
